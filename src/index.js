@@ -25,7 +25,7 @@ document.addEventListener("DOMContentLoaded", (e) => {
     .then((resp) => resp.json())
     .then((data) => {
       let films = data;
-    //   console.log(films);
+      //   console.log(films);
       for (let i = 0; i < films.length; i++) {
         // insert titles to list
         let newTitle = document.createElement("li");
@@ -52,66 +52,42 @@ document.addEventListener("DOMContentLoaded", (e) => {
           let remainingTickets =
             `${films[i].capacity}` - `${films[i].tickets_sold}`;
           document.querySelector("#ticket-num").textContent = remainingTickets;
-          document.querySelector("button #buy-ticket")
-        //========================================
-          // buton clicks - from remeningTickets.
-          //   let buyTicketButton = document.querySelector("#buy-ticket");
-          //   buyTicketButton.addEventListener("click", (e) => {
-          //     let ticketNumber = document.querySelector("#ticket-num");
-          //     console.log(ticketNumber);
-          //     // ticketNumber.value = remainingTickets - 1;
-          //   });
-            //   if ((remainingTickets = 0)) {
-            //     newTitle.setAttribute("class", "sold-out film item");
-            //   }
+          document.querySelector("button #buy-ticket");
+          let titleClass = document.getElementsByClassName("film item");
+          console.log(titleClass);
+          titleClass.addEventListener("click", enableButton());
         });
       }
       buyTickets();
-    //===================================
-      //   let buyTicketButton = document.querySelector("#buy-ticket");
-      //   buyTicketButton.addEventListener("click", (e) => {
-      //     let ticketNumber = document.querySelector("#ticket-num").textContent;
-      //     // console.log(ticketNumber);
-      //     let buyTicket = ticketNumber - 1;
-      //     console.log(buyTicket);
-      //     ticketNumber.textContent = buyTicket;
-      //     //   return buyTickets();ticket-num
-      //   });
-      // buy ticket click decrease remaining tickets by one on click; with 0 remainins, button disabled / read sold out
-      // add class sold out to films with 0 tickets
-      // let remainingTickets = `${array.capacity}` - `${array.tickets_sold}`;
     });
 });
 
 function buyTickets() {
-  document.querySelector("#buy-ticket").addEventListener("click", () => {
+  let button = document.querySelector("#buy-ticket");
+  button.addEventListener("click", () => {
     let numberValue = document.querySelector("#ticket-num").textContent;
-    // if (numberValue > 0) {
-    //   document.querySelector("#buy-ticket").textContent = "Buy Ticket";
-    // }
     let click = numberValue - 1;
     if (click < 0) {
       document.querySelector("#buy-ticket").textContent = "SOLD OUT";
-      let titleClass = document.getElementsByClassName("film item");
-    //   console.log(titleClass);
-    //   titleClass.setAttribute("class", "sold-out film item");
       disableButton();
     } else {
       document.querySelector("#ticket-num").textContent = `${click}`;
+    //   document.querySelector("#buy-ticket").textContent = "Buy Ticket";
+    //   enableButton();
     }
   });
 }
 
 function disableButton() {
-  let button = document.getElementById("buy-ticket")
+  let button = document.getElementById("buy-ticket");
   button.setAttribute("disabled", "true");
-//   console.log(button);
+  //   console.log(button);
   console.log("success");
 }
 
 function enableButton() {
-    let button = document.getElementById("buy-ticket")
-    button.setAttribute("enabled", "true");
-    // console.log(button);
-    // console.log("success");
-  }
+  let button = document.getElementById("buy-ticket");
+  button.setAttribute("disabled", "false");
+  // console.log(button);
+  console.log("success2");
+}
