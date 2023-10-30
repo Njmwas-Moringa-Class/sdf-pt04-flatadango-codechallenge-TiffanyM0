@@ -55,7 +55,7 @@ document.addEventListener("DOMContentLoaded", (e) => {
           document.querySelector("button #buy-ticket");
           let titleClass = document.getElementsByClassName("film item");
           console.log(titleClass);
-          titleClass.addEventListener("click", enableButton());
+          // titleClass.addEventListener("click", enableButton());
         });
       }
       buyTickets();
