@@ -33,6 +33,7 @@ document.addEventListener("DOMContentLoaded", (e) => {
         newTitle.textContent = `${films[i].title}`;
         newTitle.setAttribute("class", "film item");
         document.querySelector("#films").appendChild(newTitle);
+
         // add event listener to list
         newTitle.addEventListener("click", (e) => {
           let poster = document.querySelector("#poster");
@@ -59,7 +60,12 @@ document.addEventListener("DOMContentLoaded", (e) => {
             document.querySelector("#buy-ticket").textContent = "Buy Ticket";
           }
           // buyTickets();
+          // class name change
         });
+        let sold = document.querySelector("#buy-ticket").textContent;
+        console.log(sold);
+
+        // newTitle.setAttribute("class", "sold-out film item");
       }
     });
 });
@@ -74,6 +80,7 @@ function buyTickets() {
     } else {
       document.querySelector("#buy-ticket").textContent = "SOLD OUT";
       disableButton();
+      // console.log(list);
     }
   });
 }
@@ -91,3 +98,15 @@ function enableButton() {
   // console.log(button);
   console.log("success2");
 }
+
+// function tickets_sold(films) {
+//   fetch(`http://localhost:3000/films/${films.id}`, {
+//     method: "PATCH",
+//     headers: {
+//       "Content-type": "appliation/json",
+//     },
+//     body: JSON.stringify(films),
+//   })
+//     .then((resp) => resp.json())
+//     .then(film => console.log(film));
+// }
