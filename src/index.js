@@ -19,6 +19,7 @@ document.addEventListener("DOMContentLoaded", (e) => {
       // remaining tickets = capacity - tickets sold
       let remainingTickets = `${array.capacity}` - `${array.tickets_sold}`;
       document.querySelector("#ticket-num").textContent = remainingTickets;
+      buyTickets();
     });
 
   fetch("http://localhost:3000/films")
@@ -52,13 +53,14 @@ document.addEventListener("DOMContentLoaded", (e) => {
           let remainingTickets =
             `${films[i].capacity}` - `${films[i].tickets_sold}`;
           document.querySelector("#ticket-num").textContent = remainingTickets;
-          document.querySelector("button #buy-ticket");
-          let titleClass = document.getElementsByClassName("film item");
-          console.log(titleClass);
-          // titleClass.addEventListener("click", enableButton());
+          let span = document.querySelector("#ticket-num").textContent;
+          if (span > 0) {
+            enableButton();
+            document.querySelector("#buy-ticket").textContent = "Buy Ticket";
+          }
+          // buyTickets();
         });
       }
-      buyTickets();
     });
 });
 
@@ -67,27 +69,25 @@ function buyTickets() {
   button.addEventListener("click", () => {
     let numberValue = document.querySelector("#ticket-num").textContent;
     let click = numberValue - 1;
-    if (click < 0) {
+    if (click >= 0) {
+      document.querySelector("#ticket-num").textContent = `${click}`;
+    } else {
       document.querySelector("#buy-ticket").textContent = "SOLD OUT";
       disableButton();
-    } else {
-      document.querySelector("#ticket-num").textContent = `${click}`;
-    //   document.querySelector("#buy-ticket").textContent = "Buy Ticket";
-    //   enableButton();
     }
   });
 }
 
 function disableButton() {
   let button = document.getElementById("buy-ticket");
-  button.setAttribute("disabled", "true");
+  button.disabled = true;
   //   console.log(button);
   console.log("success");
 }
 
 function enableButton() {
   let button = document.getElementById("buy-ticket");
-  button.setAttribute("disabled", "false");
+  button.disabled = false;
   // console.log(button);
   console.log("success2");
 }
